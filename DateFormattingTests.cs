@@ -32,11 +32,11 @@ namespace temp_dates_test
             var timezoneId = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Europe/Oslo" : "Central European Standard Time";
             var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
             
-            var date = new DateTime(2020,6,29);
+            var date = new DateTime(2020,6,29, 13,37,10);
             var offset = timeZoneInfo.GetUtcOffset(date);
             var dateWithOffset = new DateTimeOffset(date,offset);
 
-            Assert.Contains("+02:00", dateWithOffset.ToString("yyyy-MM-dd HH:mm:sszzz"));
+            Assert.Contains("2020-06-29 13:37:10+02:00", dateWithOffset.ToString("yyyy-MM-dd HH:mm:sszzz"));
         }
         
         [Fact]
@@ -45,10 +45,10 @@ namespace temp_dates_test
             var timezoneId = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Europe/Oslo" : "Central European Standard Time";
             var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
             
-            var date = new DateTime(2020,6,29).Date;
+            var date = new DateTime(2020,6,29, 13,37,10);
             var converted = TimeZoneInfo.ConvertTime(date, timeZoneInfo);
 
-            Assert.Contains("+02:00", converted.ToString("yyyy-MM-dd HH:mm:sszzz"));
+            Assert.Equal("2020-06-29 13:37:10+02:00", converted.ToString("yyyy-MM-dd HH:mm:sszzz"));
         }
     }
 }
