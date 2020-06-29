@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using Xunit;
 using Xunit.Abstractions;
@@ -38,7 +39,7 @@ namespace temp_dates_test
         {
             var date = new DateTime(2020,6,29, 13,37,10);
             var converted = TimeZoneInfo.ConvertTime(date, GetNorwegianTimeZoneInfo());
-
+            Assert.Equal("ivl", System.Threading.Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName);
             Assert.Equal("2020-06-29 15:37:10+00:00", converted.ToString("yyyy-MM-dd HH:mm:sszzz"));
         }
 
