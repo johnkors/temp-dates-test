@@ -29,16 +29,14 @@ namespace temp_dates_test
         [Fact]
         public void OutputsCorrectlyFromUtc()
         {
-            var utc = DateTimeOffset.UtcNow;
-
             var timezoneId = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Europe/Oslo" : "Central European Standard Time";
             var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
             
-            var norwegian = TimeZoneInfo.ConvertTime(utc, timeZoneInfo);
-            _helper.WriteLine(utc.ToString("yyyy-MM-dd HH:mm:sszzz"));
-            _helper.WriteLine(norwegian.ToString("yyyy-MM-dd HH:mm:sszzz"));
+            var date = new DateTime(2020,6,29);
+            var offset = timeZoneInfo.GetUtcOffset(date);
+            var dateWithOffset = new DateTimeOffset(date,offset);
 
-            Assert.Contains("+02:00", norwegian.ToString("yyyy-MM-dd HH:mm:sszzz"));
+            Assert.Contains("+02:00", dateWithOffset.ToString("yyyy-MM-dd HH:mm:sszzz"));
         }
     }
 }
