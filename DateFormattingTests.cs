@@ -15,7 +15,7 @@ namespace temp_dates_test
         }
         
         [Fact]
-        public void OutputsCorrectly()
+        public void OutputsCorrectly_FromDateTimeOffset1()
         {
             var leet = new DateTimeOffset(2020,6,29,13,37,10,new TimeSpan(0,2,0,0));
 
@@ -27,7 +27,7 @@ namespace temp_dates_test
         }
         
         [Fact]
-        public void OutputsCorrectlyFromUtc()
+        public void OutputsCorrectly_FromDateTimeOffset2()
         {
             var timezoneId = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Europe/Oslo" : "Central European Standard Time";
             var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
@@ -37,6 +37,18 @@ namespace temp_dates_test
             var dateWithOffset = new DateTimeOffset(date,offset);
 
             Assert.Contains("+02:00", dateWithOffset.ToString("yyyy-MM-dd HH:mm:sszzz"));
+        }
+        
+        [Fact]
+        public void OutputsCorrectly_FromDateTimeDate()
+        {
+            var timezoneId = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Europe/Oslo" : "Central European Standard Time";
+            var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
+            
+            var date = new DateTime(2020,6,29).Date;
+            var converted = TimeZoneInfo.ConvertTime(date, timeZoneInfo);
+
+            Assert.Contains("+02:00", converted.ToString("yyyy-MM-dd HH:mm:sszzz"));
         }
     }
 }
