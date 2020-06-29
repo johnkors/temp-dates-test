@@ -39,7 +39,7 @@ namespace temp_dates_test
             var date = new DateTime(2020,6,29, 13,37,10);
             var converted = TimeZoneInfo.ConvertTime(date, GetNorwegianTimeZoneInfo());
 
-            Assert.Equal("2020-06-29 13:37:10+02:00", converted.ToString("yyyy-MM-dd HH:mm:sszzz"));
+            Assert.Equal("2020-06-29 15:37:10+00:00", converted.ToString("yyyy-MM-dd HH:mm:sszzz"));
         }
 
         private static TimeZoneInfo GetNorwegianTimeZoneInfo()
