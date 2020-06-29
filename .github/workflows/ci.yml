@@ -54,3 +54,11 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-restore
+
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2      -
+      - name: docker build
+        run: docker build . --rm
